@@ -109,11 +109,11 @@ app.get("/todos/:todoId/", async (request, response) => {
 
 app.post("/todos/", async (request, response) => {
   const addTodo = `
-    INSERT INTO todo(todoId,Todo,Priority,Status)
+    INSERT INTO todo(todoId,todo,priority,status)
     VALUES id = ${todoId},
-    todo = ${Todo},
-    priority = ${Priority},
-    status = ${Status};`;
+    todo = '${todo}',
+    priority = '${priority}',
+    status = '${status}';`;
   const addingTodo = await db.run(addTodo);
   response.send("Todo Successfully Added");
 });
@@ -144,8 +144,8 @@ app.put("/todos/:todoId/", async (request, response) => {
     UPDATE todo 
     SET 
     todo = '${todo}',
-    priority = ${priority},
-    status = ${status}
+    priority = '${priority}',
+    status = '${status}'
     WHERE id = ${todoId};`;
   await db.run(updatedTodoQuary);
   response.send(`${updateColumn} Updated`);
