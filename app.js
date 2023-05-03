@@ -108,13 +108,11 @@ app.get("/todos/:todoId/", async (request, response) => {
 });
 
 app.post("/todos/", async (request, response) => {
+  const { id, todo, priority, status } = request.body;
   const addTodo = `
-    INSERT INTO todo(todoId,todo,priority,status)
-    VALUES id = ${todoId},
-    todo = '${todo}',
-    priority = '${priority}',
-    status = '${status}';`;
-  const addingTodo = await db.run(addTodo);
+    INSERT INTO todo(id,todo,priority,status)
+    VALUES (${id},'${todo}', '${priority}','${status}');`;
+  await db.run(addTodo);
   response.send("Todo Successfully Added");
 });
 
